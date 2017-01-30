@@ -1,3 +1,4 @@
+"""le programe suivant permet d'ouvrir un fenetre simple avec hello world"""
 from tkinter import *
 from time import *
 from math import *
