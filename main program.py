@@ -1,4 +1,6 @@
-"""le programe suivant permet d'ouvrir un fenetre avec un toile, """
+"""le programe suivant permet d'ouvrir une fenetre avec une toile, """
+
+#Importer les modules
 from tkinter import *
 from time import *
 from math import *
