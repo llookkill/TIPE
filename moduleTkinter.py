@@ -38,12 +38,15 @@ def cible():
     toile.create_text(130,110,text=("30"),font="Arial 8",fill='black')
     toile.create_text(150,110,text=("20"),font="Arial 8",fill='blue')
     toile.create_text(170,110,text=("10"),font="Arial 8",fill='red')
-def concentrique(x,y,r):
+def concentrique():
+    r=120
+    x=y=250
     while r>0:
         toile.create_oval(x-r,y-r,x+r,y+r,fill='white',outline='black',width=2)
         r-=10
     toile.create_line(x,y-r,x,y+r)
     toile.create_line(x-r,y,x+r,y)
+    print('lol')
 
 
 fenetre = Tk()
@@ -52,7 +55,7 @@ toile = Canvas(fenetre, width=1000, height=1000, background='black')
 boutrec=Button(fenetre,text="créer le rectangle",command=rectangle).pack()
 boutcer=Button(fenetre,text="créer le cerle",command=cercle).pack()
 boutcib=Button(fenetre,text="créer la cible",command=cible).pack()
-boutcon=Button(fenetre,text="créer les cercles concentriques",command=concentrique(250,250,200)).pack()
+boutcon=Button(fenetre,text="créer les cercles concentriques",command=concentrique).pack()
 #toile.bind("<Button-1>",click)
 toile.bind("<B1-Motion>",trait_sous_click)
 #toile.bind("<Motion>",trait_continu)
