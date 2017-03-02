@@ -1,48 +1,52 @@
 from tkinter import *
 
 def defile():
+    cc=complex(0,0)
     for ca in range(int(ac.get()*100),int(ac.get()*100)+50,5):
         cc=complex(ca/100,ab.get())
         start(cc)
-        toile.update()
     for ca in range(int(ac.get()*100+50),int(ac.get()*100)-50,-5):
         cc=complex(ca/100,ab.get())
         start(cc)
-        toile.update()
     for ca in range(int(ac.get()*100-50),int(ac.get()*100)+5,+5):
         cc=complex(ca/100,ab.get())
         start(cc)
-        toile.update()
 def start(c):
     toile.delete(ALL)
     if c == complex(110,110): c=complex(ac.get(),ab.get())
     print(c)
-    for rea in range(-200,200,1):
-        for ima in range(-200,200,1):
-            z=complex(rea/100,ima/100)
+    toile.create_text(950,50,text="C = {} + {}i".format(c.real,c.imag))
+    toile.update()
+    for rea in range(-300,300,1):
+        for ima in range(-300,300,1):
+            z=complex(rea/150,ima/150)
             julia(z,c)
             
 def julia(z,c):
     Un = z
-    for loop in range(10):
+    for loop in range(20):
         Un = Un**2+c
-        if abs(Un)>3:break
-    z=z*150+complex(250,250)
+        if abs(Un)>2:break
+        if abs(Un)<0.01:break
+    z=z*149
+    z=complex(z.real,-z.imag)+complex(500,300)
     if abs(Un)<1:
-        toile.create_rectangle(round((z.real),0),round(int(z.imag)),int(z.real)+1,int(z.imag)+1,fill='black',width=1)
+        toile.create_rectangle(round((z.real),0),round(int(z.imag)),round(int(z.real),0),round(int(z.imag)),fill='blue',width=0)
+        toile.update()
 #    if abs(Un)>3:toile.create_oval(int(z.real)-1,int(z.imag)-1,int(z.real)+1,int(z.imag)+1,fill='white',width=0)
-        
 fenetre = Tk()
 fenetre.title("TIPE")
-toile = Canvas(fenetre, width=500, height=500, background='white')
+toile = Canvas(fenetre, width=1000, height=600, background='white')
 ac=DoubleVar()
 ab=DoubleVar()
 c=complex(110,110)
 Label(fenetre,text='parti réel de C').pack()
-scaleac = Scale(fenetre,from_=-1, to=1,resolution=0.01,bg="indian red",orient=HORIZONTAL,width=10,variable=ac).pack()
+scaleac = Scale(fenetre,from_=-2, to=2,resolution=0.01,bg="indian red",orient=HORIZONTAL,width=10,variable=ac).pack()
 Label(fenetre,text='parti imaginaire de C').pack()
-scaleab = Scale(fenetre,from_=-1, to=1,resolution=0.01,bg="indian red",orient=HORIZONTAL,width=10,variable=ab).pack()
+scaleab = Scale(fenetre,from_=-2, to=2,resolution=0.01,bg="indian red",orient=HORIZONTAL,width=10,variable=ab).pack()
 boutstart=Button(fenetre,text="Commencer",command=lambda: start(c)).pack(side=TOP)
 defiler=Button(fenetre,text="Commencer le défillement",command=lambda: defile()).pack(side=TOP)
+bouton = Checkbutton(fenetre, text="Update continu ?")
+bouton.pack()
 toile.pack()
 fenetre.mainloop()
