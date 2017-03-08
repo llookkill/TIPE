@@ -30,3 +30,11 @@ def initMatAlea(nbl,nbc):
         for j in range(nbc):
             mat[i][j]=randint(0,20)
     return mat
+
+#Exercice n°5
+def initMatAlea(nbl,nbc):
+    mat=initMatVide(nbl,nbc)
+    for i in range(nbl):
+        for j in range(nbc):
+            mat[i][j]=eval(input("entrer la valeur de la case [{}][{}] : ".format(i,j)))
+    return mat
