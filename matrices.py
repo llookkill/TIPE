@@ -74,6 +74,7 @@ def valeurMinEtPosition(mat):
                 posi=i
                 posj=j
     print("la valeur minimal est ",mini," et elle a été trouvée en [",posi,"][",posj,"]")
+    
 #Exercice n°9
 def presenceNombre(mat):
     nbl=len(mat)
@@ -87,3 +88,18 @@ def presenceNombre(mat):
     if test == True:
         print("la valeur",val,"est présente dans la matrice")
     else :print("la valeur",val,"n'est pas présente dans la matrice")
+    
+#Exercice n°10
+def egaliteDeuxMatrices(mat):
+    nbl=len(mat)
+    nbc=len(mat[0])
+    mat1=saisirMat(nbl,nbc)
+    test=True
+    for i in range(nbl):
+        for j in range(nbc):
+            if mat[i][j]!=mat1[i][j]:
+                test=False
+    if test ==True :print("les matrices sont identiques")
+    else:print("les matrices sont différentes")
+
+            
