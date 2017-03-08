@@ -59,3 +59,19 @@ def maximumMat(mat):
             if maxi<mat[i][j]:
                 maxi=mat[i][j]
     return maxi
+
+#Exercice n°8
+def valeurMinEtPosition(mat):
+    nbl=len(mat)
+    nbc=len(mat[0])
+    mini=mat[0][0]
+    posi=0
+    posj=0
+    for i in range(nbl):
+        for j in range(nbc):
+            if mini>mat[i][j]:
+                mini=mat[i][j]
+                posi=i
+                posj=j
+    print("la valeur minimal est ",mini," et elle a été trouvée en [",posi,"][",posj,"]")
+    
