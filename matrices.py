@@ -32,9 +32,30 @@ def initMatAlea(nbl,nbc):
     return mat
 
 #Exercice n°5
-def initMatAlea(nbl,nbc):
+def saisirMat(nbl,nbc):
     mat=initMatVide(nbl,nbc)
     for i in range(nbl):
         for j in range(nbc):
             mat[i][j]=eval(input("entrer la valeur de la case [{}][{}] : ".format(i,j)))
     return mat
+
+#Exercice n°6
+def transposeeMat(mat):
+    nbc=len(mat)
+    nbl=len(mat[0])
+    tMat=initMatVide(nbl,nbc)
+    for i in range(nbl):
+        for j in range(nbc):
+            tMat[i][j]=mat[j][i]
+    return tMat
+
+#Exercice n°7
+def maximumMat(mat):
+    nbl=len(mat)
+    nbc=len(mat[0])
+    maxi=mat[0][0]
+    for i in range(nbl):
+        for j in range(nbc):
+            if maxi<mat[i][j]:
+                maxi=mat[i][j]
+    return maxi
