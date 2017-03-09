@@ -1,5 +1,4 @@
 from tkinter import *
-
 def defile():
     cc=complex(0,0)
     for ca in range(int(ac.get()*100),int(ac.get()*100)+50,5):
