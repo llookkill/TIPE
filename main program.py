@@ -1,13 +1,16 @@
 from tkinter import *
+
 def defile():
     cc=complex(0,0)
-    for ca in range(int(ac.get()*100),int(ac.get()*100)+50,5):
+    for ca in range(int(ac.get()*100),int(ac.get()*100)+50,1):
+        cc=complex(ca/100,ab.get())
+
+        start(cc)
+    for ca in range(int(ac.get()*100+50),int(ac.get()*100)-50,-1):
         cc=complex(ca/100,ab.get())
         start(cc)
-    for ca in range(int(ac.get()*100+50),int(ac.get()*100)-50,-5):
-        cc=complex(ca/100,ab.get())
-        start(cc)
-    for ca in range(int(ac.get()*100-50),int(ac.get()*100)+5,+5):
+    for ca in range(int(ac.get()*100-50),int(ac.get()*100)+5,+1
+                    ):
         cc=complex(ca/100,ab.get())
         start(cc)
 def start(c):
@@ -16,23 +19,30 @@ def start(c):
     print(c)
     toile.create_text(950,50,text="C = {} + {}i".format(c.real,c.imag))
     toile.update()
+
     for rea in range(-300,300,1):
         for ima in range(-300,300,1):
             z=complex(rea/150,ima/150)
             julia(z,c)
             
 def julia(z,c):
+    nu=2
     Un = z
-    for loop in range(20):
+    for loop in range(9):
         Un = Un**2+c
-        if abs(Un)>2:break
+        if abs(Un)>256:break
         if abs(Un)<0.01:break
     z=z*149
     z=complex(z.real,-z.imag)+complex(500,300)
-    if abs(Un)<1:
-        toile.create_rectangle(round((z.real),0),round(int(z.imag)),round(int(z.real),0),round(int(z.imag)),fill='blue',width=0)
-        toile.update()
-#    if abs(Un)>3:toile.create_oval(int(z.real)-1,int(z.imag)-1,int(z.real)+1,int(z.imag)+1,fill='white',width=0)
+    for dist in range (1,156):
+        if abs(Un)<dist*nu:
+            coul = '#%02x%02x%02x' % (int(dist)/nu+100,int(dist)/nu,int(dist*1+00)/nu)
+            if dist ==1:
+                coul="#0054A8"
+            toile.create_rectangle(round((z.real),0),round(int(z.imag)),round(int(z.real),0),round(int(z.imag)),fill=coul,width=0)
+            toile.update()
+            break
+
 fenetre = Tk()
 fenetre.title("TIPE")
 toile = Canvas(fenetre, width=1000, height=600, background='white')
