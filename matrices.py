@@ -88,7 +88,30 @@ def presenceNombre(mat):
     if test == True:
         print("la valeur",val,"est présente dans la matrice")
     else :print("la valeur",val,"n'est pas présente dans la matrice")
-    
+        
+def presenceNombre2(mat):
+    nbl=len(mat)
+    nbc=len(mat[0])
+    rep=False
+    posi=0
+    posj=0
+    i=0
+    j=0
+    nb=eval(input('Entrez la valeur à chercher : '))
+    while (i<nbl)and(rep==False):
+        while (j<nbc)and(rep==False):
+            if (nb==mat[i][j]):
+                rep=True
+                posi=i
+                posj=j
+            j=j+1
+        i=i+1
+        j=0
+    if rep==True:
+        print("La valeur ",nb," a été trouvée à la ligne ",posi+1," et à la colonne ",posj+1,".")
+    else:
+        print("La valeur n'est pas présente")   
+
 #Exercice n°10
 def egaliteDeuxMatrices(mat):
     nbl=len(mat)
