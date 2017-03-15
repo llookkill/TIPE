@@ -124,5 +124,17 @@ def egaliteDeuxMatrices(mat):
                 test=False
     if test ==True :print("les matrices sont identiques")
     else:print("les matrices sont différentes")
+#Exercice n°11
+def sommeMat(m1,m2):
+    nbl1=len(mat1)
+    nbc1=len(mat1[0])
+    nbl2=len(mat2)
+    nbc2=len(mat2[0])
+    if nbl1 == nbl2 and nbc1 == nbc2 :
+        mat3=initMatVide(nbl1,nbc1)
+        for i in range(nbl1):
+            for j in range(nbc1):
+                mat3[i][j]=mat1[i][j]+mat2[i][j]
+        return mat3
 
             
