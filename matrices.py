@@ -85,9 +85,10 @@ def presenceNombre(mat):
         for j in range(nbc):
             if mat[i][j]==val:
                 test=True
-    if test == True:
+    if test==True:
         print("la valeur",val,"est présente dans la matrice")
-    else :print("la valeur",val,"n'est pas présente dans la matrice")
+    else:
+        print("la valeur",val,"n'est pas présente dans la matrice")
         
 def presenceNombre2(mat):
     nbl=len(mat)
@@ -122,8 +123,12 @@ def egaliteDeuxMatrices(mat):
         for j in range(nbc):
             if mat[i][j]!=mat1[i][j]:
                 test=False
-    if test ==True :print("les matrices sont identiques")
-    else:print("les matrices sont différentes")
+    if test==True:
+        print("les matrices sont identiques")
+    else:
+        print("les matrices sont différentes")
+        
+        
 #Exercice n°11
 def sommeMat(m1,m2):
     nbl1=len(mat1)
