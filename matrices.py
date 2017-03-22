@@ -85,50 +85,24 @@ def presenceNombre(mat):
         for j in range(nbc):
             if mat[i][j]==val:
                 test=True
-    if test==True:
+    if test == True:
         print("la valeur",val,"est présente dans la matrice")
-    else:
-        print("la valeur",val,"n'est pas présente dans la matrice")
-        
-def presenceNombre2(mat):
-    nbl=len(mat)
-    nbc=len(mat[0])
-    rep=False
-    posi=0
-    posj=0
-    i=0
-    j=0
-    nb=eval(input('Entrez la valeur à chercher : '))
-    while (i<nbl)and(rep==False):
-        while (j<nbc)and(rep==False):
-            if (nb==mat[i][j]):
-                rep=True
-                posi=i
-                posj=j
-            j=j+1
-        i=i+1
-        j=0
-    if rep==True:
-        print("La valeur ",nb," a été trouvée à la ligne ",posi+1," et à la colonne ",posj+1,".")
-    else:
-        print("La valeur n'est pas présente")   
-
+    else :print("la valeur",val,"n'est pas présente dans la matrice")
+    
 #Exercice n°10
 def egaliteDeuxMatrices(mat):
     nbl=len(mat)
     nbc=len(mat[0])
     mat1=saisirMat(nbl,nbc)
+    afficheMat(mat1)
     test=True
     for i in range(nbl):
         for j in range(nbc):
             if mat[i][j]!=mat1[i][j]:
                 test=False
-    if test==True:
-        print("les matrices sont identiques")
-    else:
-        print("les matrices sont différentes")
-        
-        
+    if test ==True :print("les matrices sont identiques")
+    else:print("les matrices sont différentes")
+
 #Exercice n°11
 def sommeMat(m1,m2):
     nbl1=len(mat1)
@@ -142,4 +116,39 @@ def sommeMat(m1,m2):
                 mat3[i][j]=mat1[i][j]+mat2[i][j]
         return mat3
 
-            
+
+#Exercice n°12
+def produitMat(mat1,mat2):
+    nbl1=len(mat1)
+    nbc1=len(mat1[0])
+    nbl2=len(mat2)
+    nbc2=len(mat2[0])
+    if nbc1==nbl2:
+        mat3=initMatVide(nbl1,nbc2)
+        for i in range(nbl1):
+            for j in range(nbc2):
+                cij=0
+                for k in range (nbc1):
+                    cij=cij+mat1[i][k]*mat2[k][j]
+                mat3[i][j]=cij
+        return mat3
+    else:
+        print("erreur")
+        return -1
+
+nbl1=int(input("nombre de ligne de la 1er matrice : "))
+nbc1=int(input("nombre de colonne de la 1er matrice : "))
+nbl2=int(input("nombre de ligne de la 2eme matrice : "))
+nbc2=int(input("nombre de colonne de la 2eme matrice : "))
+matrice1=initMatAlea(nbl1,nbc1)
+afficheMat(matrice1)
+print("\n")
+matrice2=initMatAlea(nbl2,nbc2)
+afficheMat(matrice2)
+print("\n")
+matrice3=produitMat(matrice1,matrice2)
+if matrice3 != -1 :
+    afficheMat(matrice3)
+else:print("-1")
+
+    
