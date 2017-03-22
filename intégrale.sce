@@ -23,3 +23,25 @@ function y=rectd(f,a,b,n)
     end
     y=((b-a)/n)*y
 endfunction
+
+function aire=trapeze(f,a,b,n)
+    pas=(b-a)/n
+    somme=0
+    xk=a
+    for k=0:n-1
+        somme=somme+((1/2)*(f(xk)+f(xk+pas))*pas)
+        xk=xk+pas
+    end
+    aire=somme
+endfunction
+
+function aire=tangenteMilieu(f,a,b,n)
+    pas=(b-a)/n
+    somme=0
+    xk=a+pas/2
+    for k=0:n-1
+        somme=somme+f(xk)*pas
+        xk=xk+pas
+    end
+    aire=somme
+endfunction
