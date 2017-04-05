@@ -1,10 +1,9 @@
 // dichotomie
-function [x0,nbIter]=dichotomie(a,b,f,eps)
-n=0
-while (b-a >=2*eps)
-    n=n+1
+function [x0,nbIter]=dichotomie(a,b,f)
+for i=1:n
+    
     //milieu de l'intervalle [a,b]
-    m=(b+a)/2
+    m=(b+a)/(a*f(b)-b*f(a))/((f(b)-f(a))
     //Détermination du sous-intervalle contenant le zéro
     if f(m)*f(a)<0 then 
         b=m
@@ -14,7 +13,7 @@ while (b-a >=2*eps)
 end
 //renvoi des résultats 
 x0=m
-nbIter=n
+
 
 endfunction
 
