@@ -1,20 +1,12 @@
-function [x,y]=Euler1(a,b,y0,n)
-
-  x=linspace(a,b,n+1)
-  y=zeros(1,n+1)
-  y(1)=y0
-  pas=(b-a)/n
-
-  for i=2:n+1
-      y(i)=y(i-1)+pas*y(i-1)
-  end
+function [x, y]=Euler1(a, b, y0, n)
+    x = linspace(a, b, n+1)
+    y = zeros(1, n+1)
+    y(1) = y0
+    pas = (b-a) / n
+    for i = 2:(n+1)
+        y(i) = (1 + pas)^i
+    end
 endfunction
-[u,v]=Euler1(0,1,1,10)
-clf()
-plot2d(u,v,2)
-x=linspace(0,1,20)
-plot2d(x,exp(x),5)
-
 
 function [x, y] = Euler2 (a, b, phi, y0, n)
     x = linspace(a, b, n+1)
@@ -22,27 +14,38 @@ function [x, y] = Euler2 (a, b, phi, y0, n)
     y(1) = y0
     pas = (b - a) / n
     for i = 2:(n+1)
-        y(i) = y(i-1) + phi(x(i-1), y(i-1))*pas
+        y(i) = y(i-1) + phi(x(i-1), y(i-1)) * pas
     end    
     
 endfunction
 
-
-//Exemple 1
-
-function z=phi1(x,y)
-  z=1/(1+x^2)
+function z = phi1(x, y)
+    z = 1/(1+x^2)
 endfunction
 
-//Exemple 2
-function z=phi2(x,y)
-  z=-y
- endfunction
- 
- x=linspace(1,2,20)
- plot2d(x,-1 ./x,5)
- 
- for i=1:20
-  [u,v]=Euler2(1,2,phi2,-1,i)
-  plot2d(u,v,2)
-  sleep(500)
+function z = phi2(x, y)
+    z = -y
+endfunction
+
+function z = phi3(x, y)
+    z = y^2
+endfunction
+
+function z = phi4(x, y)
+    z = y^2-x
+endfunction
+
+function z = phi5(x, y)
+    z = sin(x*y)
+endfunction
+
+function z = phi6(x, y)
+    z = exp(x*y)
+endfunction
+
+
+[u, v] = Euler2(0, 3, phi3, 11, 20)
+clf()
+plot2d(u,v,2)
+x = linspace(0,3,20)
+//plot2d(x, exp(-x),5)
