@@ -44,11 +44,10 @@ function z = phi6(x, y)
 endfunction
 
 
-[u, v] = Euler2(0, 3, phi3, 11, 20)
+[u, v] = predCorr(0, 1, phi1, 0, 20)
 clf()
 plot2d(u,v,2)
 x = linspace(0,3,20)
-//plot2d(x, exp(-x),5)
 
 function [x, y] = predCorr (a, b, phi, y0, n)
     x = linspace(a, b, n+1)
