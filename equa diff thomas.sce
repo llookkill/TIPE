@@ -58,3 +58,17 @@ function [x,y]=predictionCorrection(a,b,phi,y0,n)
     plot(x,y)
 endfunction
 
+function [x,y]=RungeKutta(a,b,phi,y0,n)
+    x=linspace(a,b,n+1)
+    y=zeros(1,n+1)
+    y(1)=y0
+    pas = (b-a)/n
+    for i=2:n+1
+        k1=phi(x(i-1),y(i-1))
+        k2=phi(x(i-1)+0.5*pas,y(i-1)+0.5*pas*k1)
+        k3=phi(x(i-1)+0.5*pas,y(i-1)+0.5*pas*k2)
+        k4=phi(x(i-1)+pas,y(i-1)+pas*k3)
+        y(i)=y(i-1)+pas*(k1+2*k2+2*k3+k4)/6
+    end
+    plot(x,y)
+endfunction
