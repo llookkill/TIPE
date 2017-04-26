@@ -31,5 +31,11 @@ endfunction
 //Exemple 1
 
 function z=phi1(x,y)
-z=1/(1+x^2)
+  z=1/(1+x^2)
 endfunction
+
+//Exemple 2
+function z=phi2(x,y)
+  z=-y
+ endfunction
+ 
