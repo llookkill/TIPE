@@ -6,7 +6,7 @@ function [x,y]=Euler1(a,b,y0,n)
   pas=(b-a)/n
 
   for i=2:n+1
-      y(i)=y(i-1)+pas*(y-1)
+      y(i)=y(i-1)+pas*y(i-1)
   end
 endfunction
 [u,v]=Euler1(0,1,1,10)
@@ -14,3 +14,17 @@ clf()
 plot2d(u,v,2)
 x=linspace(0,1,20)
 plot2d(x,exp(x),5)
+
+
+function [x, y] = Euler2 (a, b, phi, y0, n)
+    x = linspace(a, b, n+1)
+    y = zeros(1, n+1)
+    y(1) = y0
+    pas = (b - a) / n
+    for i = 2:(n+1)
+        y(i) = y(i-1) + phi(x(i-1), y(i-1))*pas
+    end    
+    
+endfunction
+
+
