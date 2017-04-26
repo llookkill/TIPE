@@ -21,6 +21,17 @@ function z=phi3(x,y)
     z=y^2
 endfunction
 
+function z=phi4(x,y)
+    z=y^2-x
+endfunction
+
+function z=phi5(x,y)
+    z=sin(x*y)
+endfunction
+
+function z=phi6(x,y)
+    z=exp(x*y)
+endfunction
 
 
 function [x,y]=Euler2(a,b,phi,y0,n)
@@ -33,3 +44,17 @@ function [x,y]=Euler2(a,b,phi,y0,n)
     end
     plot(x,y)
 endfunction
+
+function [x,y]=predictionCorrection(a,b,phi,y0,n)
+    x=linspace(a,b,n+1)
+    y=zeros(1,n+1)
+    y(1)=y0
+    pas = (b-a)/n
+    for i=2:n+1
+        ytmp=y(i-1)+pas*phi(x(i-1),y(i-1))
+        
+        y(i)=y(i-1)+0.5*pas*(phi(x(i-1),y(i-1))+phi(x(i),ytmp))
+    end
+    plot(x,y)
+endfunction
+
