@@ -28,3 +28,8 @@ function [x, y] = Euler2 (a, b, phi, y0, n)
 endfunction
 
 
+//Exemple 1
+
+function z=phi1(x,y)
+z=1/(1+x^2)
+endfunction
