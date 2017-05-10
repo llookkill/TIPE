@@ -22,3 +22,31 @@ print("")
 affichechaîne2(lo)
 print("")
 affichechaîne3(lo)
+
+
+#Exercice 2
+def prefixe(chaine):
+    suffixe="ack"
+    for initiale in chaine:
+        print(initiale+suffixe,end=" ")
+
+chaine="JKLMNOP"
+
+#Exercice 3
+def ordreAlpha(mot1,mot2):
+    if mot1<mot2:
+        print("Le ",mot1," précède le ",mot2,".")
+    elif mot1>mot2:
+        print("Le ",mot1," suit le ",mot2,".")
+    else:
+        print("Les deux mots sont identiques")
+        
+#Exercice 4
+def minMaj(string):
+    for i in range(len(string)):
+        if 97<=ord(string[i])<=122:
+            print (string[i]," est une minuscule")
+        elif 65<=ord(string[i])<=90:
+                   print (string[i]," est une majuscule")
+        else:
+            print(string[i]," n'est pas une lettre")
