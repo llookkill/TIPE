@@ -50,3 +50,10 @@ def minMaj(string):
                    print (string[i]," est une majuscule")
         else:
             print(string[i]," n'est pas une lettre")
+
+def voyCons(chaine):
+    for i in range(len(string)):
+        if ord(string[i])==(65 or 69 or 73 or 79 or 85 or 89 or 97 or 101 or 105 or 111 or 117 or 121):
+            print (string[i]," est une voyelle")
+        else:
+            print(string[i]," est une consonne ou un autre caractère)    
