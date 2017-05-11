@@ -57,3 +57,12 @@ def voyCons(chaine):
             print (string[i]," est une voyelle")
         else:
             print(string[i]," est une consonne ou un autre caractère)    
+
+def voyCons(chaine):
+    for caract in chaine:
+        if ord(caract) in [97,101,105,111,117,121,65,69,73,79,85,89,224,226,233,232,234,235,249,238,239]:#"aeiouyAEIOUYàâéèêëùîï"
+            print(caract," est une voyelle")
+
+        elif (ord(caract)>65 and ord(caract)<=122):
+            print(caract," est une consonne")
+                           
