@@ -58,6 +58,8 @@ def voyCons(chaine):
         else:
             print(string[i]," est une consonne ou un autre caractère)    
 
+# ou alors :
+                  
 def voyCons(chaine):
     for caract in chaine:
         if ord(caract) in [97,101,105,111,117,121,65,69,73,79,85,89,224,226,233,232,234,235,249,238,239]:#"aeiouyAEIOUYàâéèêëùîï"
