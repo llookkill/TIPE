@@ -1,100 +1,121 @@
 from tkinter import *
 from turtle import *
+
+FenPresentation = Tk()
+FenPresentation.title("Travail d’Initiative Personnelle Encadré : Présentation des fractales")
+canpre = Canvas(FenPresentation, width=1500, height=800, background='white')
+photopre = PhotoImage(file="photopre.png")
+imagepre=canpre.create_image(0, 0, anchor=NW, image=photopre)
+canpre.pack(side=LEFT)
+FraPre = Frame(FenPresentation, borderwidth=1)
+FraPre.pack(side=RIGHT)
+boutpre=Button(FraPre,text="Suivant",bg="light blue",command=FenPresentation.destroy)
+boutpre.pack(side=BOTTOM)
+
+FenPresentation.mainloop()
 fen = Tk()
-fen.title("Travail d’Initiative Personnelle Encadré : Présenation des fractales")
+fen.title("Travail d’Initiative Personnelle Encadré : Présentation des fractales")
 photo = PhotoImage(file="photo.png")
-Fra1 = Frame(fen, borderwidth=2, relief=GROOVE)
-Fra1.pack()
-can = Canvas(Fra1, width=600, height=300, background='white')
-image=can.create_image(0, 0, anchor=NW, image=photo)
+can = Canvas(fen, width=700, height=700, background='white')
+image=can.create_image(50, 50, anchor=NW, image=photo)
 can.pack(side=LEFT)
+Fra1 = Frame(fen, borderwidth=2, relief=GROOVE,bg="#D2F8FE")
+Fra1.pack(side=RIGHT)
+FraJulia = Frame(Fra1, borderwidth=2, relief=GROOVE,bg="#D2F8FE")
+FraJulia.pack(side=TOP)
+FraSerp = Frame(Fra1, borderwidth=2, relief=GROOVE)
+FraSerp.pack(side=TOP)
+FraKoch = Frame(Fra1, borderwidth=2, relief=GROOVE)
+FraKoch.pack(side=TOP)
+FraArbre = Frame(Fra1, borderwidth=2, relief=GROOVE)
+
+FraArbre.pack(side=TOP)
 
 def startjulia():
-    def start(c): #définition de la fonction qui va initialisé 
-        global precision #on définit la variable precision qui va définir la précision de la fractale
+
+    def start(c): #définition de la fonction qui va initialiser
+        global precision #on définit la variable precision
+        
         toile.delete(ALL) #on supprime la fractale d'avant
         c=complex(ac.get(),ab.get())# on va chercher la variable c
-        toile.create_text(950,50,text="C = {} + {}i".format(c.real,c.imag)) #on ajoute un texte en haut a droite pour afficher la valeur de c
-        toile.update()#on rafraichit le canvas pour afficher le texte
+        
+        #on ajoute un texte en haut à droite pour afficher la valeur de c
+        toile.create_text(950,50,text="C = {} + {}i".format(c.real,c.imag))
+        
+        toile.update()#on rafraîchit le canvas pour afficher le texte
         precision=preci.get()# on va chercher la variable precision
         pourcentage=0
         
-        #içi l'on va chercher chaque pixel dans la toile , ils correspondent a un nombre complexe (ordonnée = partie imaginaire ,abscisse = partie réel)
-        print("calcul de l'ensemble de julia")
-        for rea in range(-300,300,precision+1): # pour chaque abscisse  
-            for ima in range(-300,300,precision+1): #pour chaque ordonnée 
-                z=complex(rea/150,ima/150) #on va associé un nombre complexe
-                nb=julia(z,c) #grâce à la fonction julia, on voit si ce nombre complexe est dans l'ensemble de julia ou sinon l'on renvoie sous forme d'un nombre réel sa tendance a divergé, c'est a dire sa tendance a s'éloigné de l'ensemble de julia
-                trace(z,nb) #on colorie le pixel en fonctiondu nombre renvoyé
-                if enable.get(): # si on veut le rafraichissement en continu 
-                    toile.update() # on rafraichit la toile
-            if rea % 60 == 0: #on écrit le pourcentage effectué pour avoir un suivit
+        #ici on va chercher chaque pixel dans la toile,
+        # ils correspondent à un nombre complexe (ordonnée = partie imaginaire ,abscisse = partie réelle)  
+        for rea in range(-300,300,precision): # pour chaque abscisse  
+            for ima in range(-300,300,precision): #pour chaque ordonnée 
+                z=complex(rea/150,ima/150) #on va associer un nombre complexe
+                
+                nb=julia(z,c) #grâce à la fonction julia, on voit si ce nombre complexe est dans l'ensemble de julia
+                              #ou sinon on renvoie sous forme d'un nombre réel sa tendance à diverger,
+                              #c'est-à-dire sa tendance à s'éloigner de l'ensemble de Julia
+                
+                trace(z,nb) #on colorie le pixel en fonction du nombre renvoyé
+                
+                if enable.get(): # si on veut le rafraîchissement en continu 
+                    toile.update() # on rafraîchit la toile
+                    
+            if rea % 60 == 0: #on écrit le pourcentage effectué pour avoir un suivi
                 print(int((rea+300)/600)+pourcentage,"%")
                 pourcentage+=10
+                
+        toile.create_line(500,0,500,600,fill="white")#traçage de l'axe des abscisses et des ordonnées
+        toile.create_line(300,300,700,300,fill="white")
         print("100 %")
         print("affichage en cours")
-        toile.update()# à la fin quand tout les pixel sont près a être affiché, on rafraichit la toile
         
-    def julia(z,c): #la fonction julia qui va définir si le complexe est dans l'ensemble ou non
-        Un = z #on initialise la suite Un 
-        for loop in range(500): # on va procédé à 301 itérations
-            Un = Un**2+c # on va au terme suivant de la suite Un
-            if abs(Un) > 20 : # si Un a une valeur absolue trop élévé (s'il sort d'un périmêtre de sécurité définit par 2) alors la série somme de Un^2 +c diverge et donc n'est pas dans l'ensemble de julia
-                return loop # on retourne a quel ittération il sort de ce " périmètre de sécurité "
-                break # on sort de la boucle
-        if abs(Un) <= 20 : return -1 # si à la fin des 301 itérations la valeur absolue de Un est toujours inférieur a 2 alors l'on considère que le complexe est dans l'ensemble de julia (on renvoie -1 comme nombre)
+        toile.update()# à la fin quand tous les pixels sont prêts à être affichés, on rafraîchit la toile
 
-    def colorisation(nombre): # la fonction qui va associé une couleur au nombre s'il n'est pas dans l'ensemble de julia
+    def julia(z,c): #la fonction julia définissant si le complexe est dans l'ensemble
+        
+        Un = z #on initialise la suite Un 
+        for loop in range(100): # on va procéder à 100 itérations
+            Un = Un**2+c # on va au terme suivant de la suite Un
+            if abs(Un) > 2 : # si Un a une valeur absolue trop élévée
+                #(s'il sort d'un périmêtre de sécurité défini par 2) alors la série somme de Un^2 + c diverge
+                # et donc n'est pas dans l'ensemble de Julia
+
+                return loop # on retourne l'ittération à partir de laquelle il sort de ce "périmètre de sécurité"
+                break # on sort de la boucle
+        if abs(Un) <= 2 : return -1 # si à la fin des 100 itérations la valeur absolue de Un est toujours
+        #inférieure à 2 alors l'on considère que le complexe est dans l'ensemble de Julia (on renvoie -1 comme nombre)
+
+    def colorisation(nombre):#la fonction qui va associer une couleur au nombre s'il n'est pas dans l'ensemble de Julia
         coul=(min(54+nombre*20,254),0,min(abs(254-nombre*20),254)) # on définit sa couleur en code RGB 
         coul = str('#%02x%02x%02x' % coul) # que l'on convertit en code Hexa pour le module graphique
         return coul # on retourne la couleur
 
-    def trace(z,nb): # la fonction qui va appliqué la couleur du pixel en fonction du complexe 
-        z=z*149 # homothétie (içi on multiplie par 149 et non par 150 comme l'on l'avont fait l'or de la ligne 14 ( "z=complex(rea/150,ima/150)" ) car l'ors que l'on fait les calculs ont arrondit pour redonner des entier pour les pixels ( on ne peut pas dire au pixel 5,6 met toi en vert ) du coup il faut rétrécire à peine l'homothétie pour que chaque pixel ai une couleur  
-        z=complex(z.real,-z.imag)+complex(500,300) # on ajoute le complex(500,300) (qui correspond au milleu de la toile) pour centrer la fractale
-        if nb == -1 : couleur= "Black" # si le complexe est dans l'ensemble de julia on le colorie en noir
-        else: couleur=colorisation(nb) # sinon on utilise la fonction colorisation 
-        toile.create_rectangle(round((z.real)+precision,0),round(z.imag +precision,0),round(int(z.real)-precision,0),round(int(z.imag))-precision,fill=couleur,width=0) # on applique enfin la couleur au pixel correspondant 
+    def trace(z,nb): # la fonction qui va appliquer la couleur du pixel en fonction du complexe 
+        z=z*149 # homothétie (ici on multiplie par 149 et non par 150 comme nous l'avions fait lors de la ligne 14 :
+                # ( "z=complex(rea/150,ima/150)" )
+                #car l'orsque l'on fait les calculs, on arrondit pour redonner des entiers pour les pixels
+                #du coup il faut rétrécir à peine l'homothétie pour que chaque pixel ait une couleur  
+
+        z=complex(z.real,-z.imag)+complex(500,300) # on ajoute le complexe (500,300)
+                #(qui correspond au milleu de la toile) pour centrer la fractale
+        
+        if nb == -1 : couleur= "Black" # si le complexe est dans l'ensemble de Julia on le colorie en noir
+        else: couleur=colorisation(nb) # sinon on utilise la fonction colorisation
+
+        # on applique enfin la couleur au pixel correspondant
+        toile.create_rectangle(round((z.real)+precision,0),round(z.imag +precision,0), \
+        round(int(z.real)-precision,0),round(int(z.imag))-precision,fill=couleur,width=0)
 
     fenetre = Tk() #création de la fenêtre
     fenetre.title("TIPE Ensemble de Julia") #nom de la fenêtre
-    toile = Canvas(fenetre, width=1000, height=600, background='white') # on crée le canvas 
-    ac=DoubleVar() #on définit les variables qui vont aller dans les scale ( curseur )
-    ab=DoubleVar()
-    preci=IntVar()
-    enable = IntVar()
-    c=complex(0,0)# de base c = 0+0i
-
-    #definition des boutons etc..
-    Frame1 = Frame(fenetre, borderwidth=2, relief=GROOVE)
-    Frame1.pack(side=TOP)
-    Frame2 = Frame(Frame1, borderwidth=2, relief=GROOVE)
-    Frame2.pack(side=LEFT)
-    Frame3 = Frame(Frame1, borderwidth=2, relief=GROOVE)
-    Frame3.pack(side=RIGHT)
-    Frame4 = Frame(fenetre, borderwidth=2, relief=GROOVE)
-    Frame4.pack()
-
-    Label(Frame2,text='parti réel de C').pack(side=TOP)
-    scaleac = Scale(Frame2,from_=-2, to=2,resolution=0.01,bg="brown",orient=HORIZONTAL,width=10,variable=ac).pack()
-
-    Label(Frame3,text='parti imaginaire de C').pack(side=TOP)
-    scaleab = Scale(Frame3,from_=-2, to=2,resolution=0.01,bg="brown",orient=HORIZONTAL,width=10,variable=ab).pack(side=RIGHT)
-
-    Label(Frame4,text='précision').pack(side=TOP)
-    scalepre = Scale(Frame4,from_=0, to=5,resolution=1,bg="gold",orient=HORIZONTAL,width=3,variable=preci).pack()
-
-    boutstart=Button(fenetre,text="Commencer",bg="green",command=lambda: start(c)).pack(side=TOP)
-    bouton = Checkbutton(fenetre,variable=enable, text=" Rafraichissement en continu ")
-    bouton.pack()
+    toile = Canvas(fenetre, width=1000, height=600, background='white') # on crée le canvas
     toile.pack()
-    fenetre.mainloop()
-
-
+    start(c)
 def decale_vers_la_gauche(largeur):
     left(180)
     penup()
-    forward(180)
+    forward(largeur)
     pendown()
     left(180)
 def decale_vers_le_haut(hauteur):
@@ -124,9 +145,9 @@ def startsierpinski():
             left(60)
             backward(longueur/2)
             right(60)
-    decale_vers_la_gauche(300)
+    decale_vers_la_gauche(350)
     decale_vers_le_haut(-200)
-    sierpinski(4,600)
+    sierpinski(nSerp.get(),lSerp.get())
 
 def startkoch():
     
@@ -142,10 +163,120 @@ def startkoch():
              koch(n-1,longueur/3)
              left(60)
              koch(n-1,longueur/3)
-    decale_vers_la_gauche(300)
+    decale_vers_la_gauche(350)
     decale_vers_le_haut(-200)
-    koch(4,300)
+    koch(nKoch.get(),lKoch.get())
+def startarbre():
 
-boutjulia=Button(Fra1,text="Ensemble de julia",bg="red",command=startjulia ).pack(side=TOP)
-boutsierpinski=Button(Fra1,text="Triangle de Sierpinski",bg="green",command=startsierpinski).pack(side=TOP)
-boutkoch=Button(Fra1,text="Flocon de koch",bg="yellow",command=startkoch).pack(side=TOP)
+    coeff=2/3
+    angle=60
+
+    def tronc(taille):
+        width(7)
+        color("brown")
+        up()
+        goto(0,-250)
+        speed("fastest")
+        title("Erable")
+        shape("turtle")
+        left(90)
+        down()
+        forward(taille*2)
+        
+
+
+    def erable(taille,rep):
+        width(5)
+        (x,y)=pos()
+        color("green")
+        if rep==0 :
+            up()
+            goto(x,y)
+            down()
+        else:
+            forward((2/3)*taille)
+            right(45)
+            erable(taille*coeff,rep-1)
+            left(45)
+            
+            forward((1/3)*taille)
+            left(45)
+            erable(taille*coeff,rep-1)
+            right(45)
+
+            right(7)
+            erable(taille*coeff,rep-1)
+            left(7)
+            forward(-1/3*taille)
+            forward(-2/3*taille)
+            
+            (x,y)=pos()
+
+    tronc(lArbre.get())
+    erable(lArbre.get(),nArbre.get())
+
+
+ac=DoubleVar()
+ab=DoubleVar()
+nSerp=IntVar()
+lSerp=IntVar()
+nKoch=IntVar()
+lKoch=IntVar()
+nArbre=IntVar()
+lArbre=IntVar()
+preci=IntVar()
+enable = IntVar()
+c=complex(0,0)
+
+boutjulia=Button(FraJulia,text="Ensemble de julia",bg="light blue",command=startjulia)
+boutjulia.pack(side=TOP)
+
+Frame1 = Frame(FraJulia, borderwidth=2, relief=GROOVE)
+Frame1.pack(side=TOP)
+Frame2 = Frame(Frame1, borderwidth=2, relief=GROOVE)
+Frame2.pack(side=LEFT)
+Frame3 = Frame(Frame1, borderwidth=2, relief=GROOVE)
+Frame3.pack(side=RIGHT)
+Frame4 = Frame(FraJulia, borderwidth=2, relief=GROOVE)
+Frame4.pack()
+
+
+
+Label(Frame2,text='Partie réelle de C').pack(side=TOP)
+scaleac = Scale(Frame2,from_=-2, to=2,resolution=0.01,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=ac).pack()
+
+Label(Frame3,text='Partie imaginaire de C').pack(side=TOP)
+scaleab = Scale(Frame3,from_=-2, to=2,resolution=0.01,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=ab).pack(side=RIGHT)
+
+Label(Frame4,text='Précision').pack(side=TOP)
+scalepre = Scale(Frame4,from_=1, to=5,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=3,variable=preci).pack()
+
+
+boutsierpinski=Button(FraSerp,text="Triangle de Sierpinski",bg="light blue",command=startsierpinski)
+boutsierpinski.pack(side=TOP)
+
+Label(FraSerp,text="Nombre d'itération :").pack(side=TOP)
+scale = Scale(FraSerp,from_=1, to=6,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nSerp).pack()
+
+Label(FraSerp,text="Longueur :").pack(side=TOP)
+scale = Scale(FraSerp,from_=1, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lSerp).pack(side=TOP)
+
+boutkoch=Button(FraKoch,text="Flocon de koch",bg="light blue",command=startkoch)
+boutkoch.pack(side=TOP)
+
+Label(FraKoch,text="Nombre d'itération :").pack(side=TOP)
+scale = Scale(FraKoch,from_=1, to=5,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nKoch).pack()
+
+Label(FraKoch,text="Longueur :").pack(side=TOP)
+scale = Scale(FraKoch,from_=1, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lKoch).pack(side=TOP)
+
+boutkoch=Button(FraArbre,text="Arbre",bg="light blue",command=startarbre)
+boutkoch.pack(side=TOP)
+
+Label(FraArbre,text="Nombre d'itération :").pack(side=TOP)
+scale = Scale(FraArbre,from_=1, to=6,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nArbre).pack()
+
+Label(FraArbre,text="Longueur :").pack(side=TOP)
+scale = Scale(FraArbre,from_=1, to=120,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lArbre).pack(side=TOP)
+
+fen.mainloop()
