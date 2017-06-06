@@ -259,7 +259,7 @@ Label(FraSerp,text="Nombre d'itération :").pack(side=TOP)
 scale = Scale(FraSerp,from_=1, to=6,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nSerp).pack()
 
 Label(FraSerp,text="Longueur :").pack(side=TOP)
-scale = Scale(FraSerp,from_=1, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lSerp).pack(side=TOP)
+scale = Scale(FraSerp,from_=100, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lSerp).pack(side=TOP)
 
 boutkoch=Button(FraKoch,text="Flocon de koch",bg="light blue",command=startkoch)
 boutkoch.pack(side=TOP)
@@ -268,7 +268,7 @@ Label(FraKoch,text="Nombre d'itération :").pack(side=TOP)
 scale = Scale(FraKoch,from_=1, to=5,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nKoch).pack()
 
 Label(FraKoch,text="Longueur :").pack(side=TOP)
-scale = Scale(FraKoch,from_=1, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lKoch).pack(side=TOP)
+scale = Scale(FraKoch,from_=100, to=600,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lKoch).pack(side=TOP)
 
 boutkoch=Button(FraArbre,text="Arbre",bg="light blue",command=startarbre)
 boutkoch.pack(side=TOP)
@@ -277,6 +277,6 @@ Label(FraArbre,text="Nombre d'itération :").pack(side=TOP)
 scale = Scale(FraArbre,from_=1, to=6,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=nArbre).pack()
 
 Label(FraArbre,text="Longueur :").pack(side=TOP)
-scale = Scale(FraArbre,from_=1, to=120,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lArbre).pack(side=TOP)
+scale = Scale(FraArbre,from_=50, to=120,resolution=1,bg="#D94E4E",orient=HORIZONTAL,width=10,variable=lArbre).pack(side=TOP)
 
 fen.mainloop()
